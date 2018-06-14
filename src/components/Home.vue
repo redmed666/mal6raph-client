@@ -22,6 +22,7 @@ export default {
   components: {
     D3Network
   },
+  props: ["endpoint_all"],
   data() {
     return {
       nodes: null,
@@ -31,7 +32,7 @@ export default {
       fY: 0.5,
       fMb: true,
       fC: false,
-      endpoint: "http://localhost:8080/all"
+      endpoint_all: null
     };
   },
   created() {
@@ -65,7 +66,7 @@ export default {
   methods: {
     getAllSamples() {
       axios
-        .get(this.endpoint)
+        .get(this.endpoint_all)
         .then(response => {
           this.nodes = response.data.nodes;
           this.links = response.data.links;

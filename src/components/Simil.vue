@@ -33,6 +33,7 @@ export default {
     bootstrapVue,
     D3Network
   },
+  props: ["endpoint"],
   data() {
     return {
       nodes: null,
@@ -43,7 +44,7 @@ export default {
       fMb: true,
       fC: false,
       samples: null,
-      endpoint: "http://localhost:8080/",
+      endpoint: null,
       previousNode: null
     };
   },

@@ -1,6 +1,6 @@
 <template>
 <div class="uploadsample">
-    <b-form-file v-model="file" v-on:change="handleFileUpload()" placeholder="Choose a file..." enctype="multipart/form-data" id="file" ref="file">
+    <b-form-file v-model="files" v-on:change="handleFileUpload()" enctype="multipart/form-data" id="filesInput" ref="filesInput" :multiple=true>
     </b-form-file>
     <b-button v-on:click="submitFile()">Submit</b-button>
     
@@ -20,33 +20,37 @@ export default {
   components: {
     bootstrapVue
   },
+  props: ["endpoint_upload"],
   data() {
     return {
-      file: "",
-      endpoint: "http://localhost:8080/upload",
+      files: null,
+      endpoint_upload: null,
       sha256: ""
     };
   },
   methods: {
     handleFileUpload() {
-      this.file = this.$refs.file;
+      this.files = this.$refs.filesInput;
     },
     submitFile() {
-      let formData = new FormData();
-      formData.append("file", this.file);
-      axios
-        .post(this.endpoint, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(response => {
-          this.sha256 = response.data.sha256;
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      console.log(this.files);
+      this.files.forEach(file => {
+        let formData = new FormData();
+        formData.append("file", file);
+        axios
+          .post(this.endpoint_upload, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data"
+            }
+          })
+          .then(response => {
+            this.sha256 = response.data.sha256;
+            console.log(response.data);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      });
     }
   }
 };

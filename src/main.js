@@ -11,23 +11,32 @@ import Update from '@/components/Update'
 
 Vue.use(Router)
 Vue.use(BootstrapVue)
+var endpoint = "http://localhost:8080/"
 
 var router = new Router({
   routes: [{
       path: '/',
       name: 'home',
       component: Home,
+      props: {
+        endpoint_all: endpoint + "all"
+      }
     },
     {
       path: '/upload',
       name: 'upload',
       component: Upload,
-      props: true
+      props:  {
+        endpoint_upload: endpoint + "upload"
+      }
     },
     {
       path: '/simil',
       name: 'simil',
-      component: Simil
+      component: Simil,
+      props: {
+        endpoint: endpoint
+      }
     },
     {
       path: '/update',
