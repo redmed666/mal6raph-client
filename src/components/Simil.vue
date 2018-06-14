@@ -9,10 +9,16 @@
         <div v-if="nodes==0">
           <div>Nodes is empty</div>
         </div>
-        <div id="graph" v-if="nodes">
-            <d3-network :net-nodes="nodes" :net-links="links" :options="options" v-on:node-click="showLabel">
-            </d3-network>
+        <div class="controls">
+        <label>Force: {{force}}</label>
+          <input type="range" min="1" max="5000" v-model="force"> 
+          <label>Forces X: {{fX}}</label>
+          <input type="range" min="0" max="1" step=".01" v-model="fX"> 
+          <label>Forces Y: {{fY}}</label>
+          <input type="range" min="0" max="1" step=".01" v-model="fY"> 
         </div>
+        <d3-network :net-nodes="nodes" :net-links="links" :options="options" id="graph"  v-if="nodes" v-on:node-click="showLabel">
+        </d3-network>
     </div>
 </template>
 
@@ -31,19 +37,43 @@ export default {
     return {
       nodes: null,
       links: null,
+      force: 50,
+      fX: 0.5,
+      fY: 0.5,
+      fMb: true,
+      fC: false,
       samples: null,
-      options: {
-        force: 1000,
-        nodeSize: 20,
-        nodeLabels: false,
-        linkWidth: 5
-      },
       endpoint: "http://localhost:8080/",
       previousNode: null
     };
   },
   created() {
     this.getSamples();
+  },
+  computed: {
+    options() {
+      return {
+        force: this.force,
+        forces: {
+          X: this.fX,
+          Y: this.fY,
+          ManyBody: this.fMb,
+          Center: this.fC
+        },
+        nodeSize: 20,
+        nodeLabels: false,
+        size: {
+          w: Math.max(
+            document.documentElement.clientWidth,
+            window.innerWidth || 0
+          ),
+          h: Math.max(
+            document.documentElement.clientHeight,
+            window.innerHeight || 0
+          )
+        }
+      };
+    }
   },
   methods: {
     getSamples() {

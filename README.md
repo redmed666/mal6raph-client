@@ -6,7 +6,7 @@ just run `npm install` and you will ready to go.
 
 ## What does it look like
 
-Coming
+![Alt text](./docs/img/client_home.png?raw=true "Homepage")
 
 ## TODO
 
@@ -16,3 +16,5 @@ Coming
 * [ ] Upload FLIRT signatures
 * [ ] Integrate YARA somehow
 * [ ] Remove some dependencies (VueJS-D3 component, ...)
+* [ ] Legend
+* [ ] Nodes name when clicked on (homepage)
