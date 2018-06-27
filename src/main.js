@@ -8,6 +8,7 @@ import Upload from '@/components/Upload'
 import Home from '@/components/Home'
 import Search from '@/components/Search'
 import Update from '@/components/Update'
+import Progress from '@/components/Progress'
 
 Vue.use(Router)
 Vue.use(BootstrapVue)

@@ -2,7 +2,7 @@
     <div>
         <div class="controls">
         <label>Force: {{force}}</label>
-          <input type="range" min="1" max="5000" v-model="force"> 
+          <input type="range" min="1" max="500" v-model="force"> 
           <label>Forces X: {{fX}}</label>
           <input type="range" min="0" max="1" step=".01" v-model="fX"> 
           <label>Forces Y: {{fY}}</label>
